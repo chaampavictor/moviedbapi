@@ -51,7 +51,7 @@ function App() {
     });
   };
 
-  const PlayingNow = () => {
+  const GetList = () => {
     setCount(count + 1);
     const name = "now_playing";
     const latest = api.get(`movie/${name}`, { params: { api_key } });
@@ -94,16 +94,37 @@ function App() {
             marginBottom: "12px",
           }}
         >
-          {/**/}
-          <Button variant="danger" className="filterbutton">
+          {/* <Button variant="danger" className="filterbutton">
             Number of Clicks:{count}
           </Button>
-          <Filterbutton
-            PlayingNow={PlayingNow}
-            GetUpcoming={GetUpcoming}
-            GetTopRated={GetTopRated}
-            GetMostPopular={GetMostPopular}
-          />
+          <Button
+            variant="danger"
+            className="filterbutton"
+            onClick={GetMostPopular}
+          >
+            Most Popular
+          </Button>
+          <Button
+            variant="danger"
+            className="filterbutton"
+            onClick={GetTopRated}
+          >
+            Top Rated
+          </Button>
+          <Button variant="danger" className="filterbutton" onClick={GetList}>
+            {" "}
+            Now Playing
+          </Button>
+          <Button
+            variant="danger"
+            className="filterbutton"
+            onClick={GetUpcoming}
+          >
+            {" "}
+            Upcoming
+          </Button> */}
+
+          <Filterbutton />
 
           <Searchform handleSubmit={searchMovie} />
         </div>

@@ -3,12 +3,11 @@ import axios from "axios";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Modal from "react-bootstrap/Modal";
-
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Searchform from "./components/searchform.js";
-import Filterbutton from "./components/filterbutton";
-
-import Details from "./components/details";
 import { useCallback } from "react";
 const api_key = "872c70d736d1ef4484522f734137927d";
 const BASE_URL = "https://api.themoviedb.org/3";
@@ -51,10 +50,10 @@ function App() {
     });
   };
 
-  const PlayingNow = () => {
+  const GetPlaying = () => {
     setCount(count + 1);
-    const name = "now_playing";
-    const latest = api.get(`movie/${name}`, { params: { api_key } });
+
+    const latest = api.get("movie/now_playing", { params: { api_key } });
     latest.then((res) => {
       console.log("now_playing movies", res.data);
       setData(res.data.results);
@@ -71,16 +70,24 @@ function App() {
     });
   };
 
-  const searchMovie = (name) => {
-    setCount(count + 1);
+  const searchMovie = useCallback((name, e) => {
+    e.preventDefult();
+    console.log("get the movie here");
+    // setCount(count);
+  }, []);
 
-    console.log(name);
-    const query = name;
-    const latest = api.get("search/movie", { params: { api_key, query } });
-    latest.then((res) => {
-      setData(res.data.results);
-    });
-  };
+  // const searchMovie = async (e) => {
+  //   setCount(count + 1);
+
+  //   e.preventDefault();
+
+  //   console.log(name);
+  //   const query = name;
+  //   const latest = api.get("search/movie", { params: { api_key, query } });
+  //   latest.then((res) => {
+  //     setData(res.data.results);
+  //   });
+  // };
 
   return (
     <div className="App">
@@ -94,16 +101,39 @@ function App() {
             marginBottom: "12px",
           }}
         >
-          {/**/}
           <Button variant="danger" className="filterbutton">
             Number of Clicks:{count}
           </Button>
-          <Filterbutton
-            PlayingNow={PlayingNow}
-            GetUpcoming={GetUpcoming}
-            GetTopRated={GetTopRated}
-            GetMostPopular={GetMostPopular}
-          />
+          <Button
+            variant="danger"
+            className="filterbutton"
+            onClick={GetMostPopular}
+          >
+            Most Popular
+          </Button>
+          <Button
+            variant="danger"
+            className="filterbutton"
+            onClick={GetTopRated}
+          >
+            Top Rated
+          </Button>
+          <Button
+            variant="danger"
+            className="filterbutton"
+            onClick={GetPlaying}
+          >
+            {" "}
+            Now Playing
+          </Button>
+          <Button
+            variant="danger"
+            className="filterbutton"
+            onClick={GetUpcoming}
+          >
+            {" "}
+            Upcoming
+          </Button>
 
           <Searchform handleSubmit={searchMovie} />
         </div>
@@ -115,7 +145,26 @@ function App() {
           onHide={handleClose}
           animation={true}
         >
-          <Details data={details} />
+          <Row>
+            <Col>
+              <img
+                src={getImage(details.poster_path)}
+                alt="Nature"
+                style={{ width: "100%", height: "466px" }}
+              />
+            </Col>
+          </Row>
+          <Container>
+            <Row>
+              <Col>
+                <h4>{details.original_title}</h4>
+                <p> release date: {details.release_date}</p>
+                <p> popularity: {details.popularity}</p>
+
+                <p> {details.overview}</p>
+              </Col>
+            </Row>
+          </Container>
         </Modal>
         <div
           className="explore-card-columns  container-fluid"

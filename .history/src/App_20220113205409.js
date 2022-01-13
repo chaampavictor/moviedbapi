@@ -51,7 +51,7 @@ function App() {
     });
   };
 
-  const PlayingNow = () => {
+  const GetList = () => {
     setCount(count + 1);
     const name = "now_playing";
     const latest = api.get(`movie/${name}`, { params: { api_key } });
@@ -98,12 +98,7 @@ function App() {
           <Button variant="danger" className="filterbutton">
             Number of Clicks:{count}
           </Button>
-          <Filterbutton
-            PlayingNow={PlayingNow}
-            GetUpcoming={GetUpcoming}
-            GetTopRated={GetTopRated}
-            GetMostPopular={GetMostPopular}
-          />
+          <Filterbutton />
 
           <Searchform handleSubmit={searchMovie} />
         </div>
