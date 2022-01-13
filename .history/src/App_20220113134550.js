@@ -101,9 +101,6 @@ function App() {
             marginBottom: "12px",
           }}
         >
-          <Button variant="danger" className="filterbutton">
-            Number of Clicks:{count}
-          </Button>
           <Button
             variant="danger"
             className="filterbutton"
@@ -146,6 +143,7 @@ function App() {
             </label>
             <input type="submit" value="Search" className="submitbutton" />
           </form>
+          Number of Clicks:{count}
         </div>
         <Modal
           dialogClassName="modal-90w"

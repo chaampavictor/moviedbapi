@@ -1,0 +1,101 @@
+.explore-nav {
+  padding-top: 30px;
+}
+
+.item {
+  margin-bottom: 15px;
+}
+
+.image-item {
+  border-radius: 52px;
+}
+
+.filterbutton {
+  height: 40px;
+  margin-right: 9px;
+  background: red;
+  border: red 1px solid;
+  border-radius: 5px;
+  color: white;
+  font-weight: bolder;
+}
+
+.image {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: 0.5s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  transition: 0.5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.container:hover .image {
+  opacity: 0.3;
+}
+
+.container:hover .middle {
+  opacity: 1;
+}
+
+.text {
+  background-color: #04aa6d;
+  color: white;
+  font-size: 16px;
+  padding: 16px 32px;
+}
+
+.explore-body .card-body:hover {
+  /* color: #30adb4; */
+  background: "#32c709";
+}
+
+.card {
+  border: 0px solid rgba(0, 0, 0, 0.125) !important;
+}
+
+.user-reaction div {
+  padding-right: 20px;
+}
+
+.explore-card-columns .card {
+  margin-bottom: 0.79rem;
+}
+@media screen and (min-width: 992px) {
+  .explore-card-columns {
+    -webkit-column-count: 4;
+    -moz-column-count: 4;
+    column-count: 4;
+    -webkit-column-gap: 1.25rem;
+    -moz-column-gap: 1.25rem;
+    column-gap: 1.25rem;
+  }
+  .explore-card-columns .card {
+    display: inline-block;
+    width: 100%;
+  }
+}
+@media screen and (max-width: 992px) {
+  .explore-card-columns {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+  }
+}
+@media screen and (max-width: 600px) {
+  .explore-card-columns {
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+  }
+}

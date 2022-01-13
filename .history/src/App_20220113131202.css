@@ -24,8 +24,8 @@
 .submitbutton {
   height: 40px;
   margin-right: 9px;
-  background: #dc3545;
-  border: #dc3545 1px solid;
+  background: red;
+  border: red 1px solid;
   border-radius: 5px;
   color: white;
   font-weight: bolder;

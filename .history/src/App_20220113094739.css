@@ -1,0 +1,114 @@
+.explore-nav {
+  padding-top: 30px;
+}
+
+.item {
+  margin-bottom: 15px;
+}
+
+.image-item {
+  border-radius: 52px;
+}
+
+.filterbutton {
+  height: 40px;
+  margin-right: 9px;
+  background: red;
+  border: red 1px solid;
+  border-radius: 5px;
+  color: white;
+  font-weight: bolder;
+}
+
+.explore-nav-link {
+  font-family: Ubuntu;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 21px;
+  color: #3e3e3e;
+  opacity: 0.6;
+  text-decoration: none;
+  padding: 10px 10px;
+}
+.explore-nav-link:hover {
+  color: #f7931e !important;
+  text-decoration: none;
+}
+.explore-nav-link:focus {
+  color: #f7931e;
+}
+
+.explore-user-detail {
+  padding-top: 20px;
+  /* background: red; */
+  text-align: center;
+}
+.explore-user-detail img {
+  height: 30px;
+  width: 30px;
+}
+.explore-username {
+  padding-left: 15px;
+  padding-right: 30px;
+  font-family: Ubuntu;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 21px;
+  color: #fff;
+}
+.follow {
+  font-family: Ubuntu;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 21px;
+  background: none;
+  outline: none;
+  border: none;
+}
+.explore-body .card-body:hover {
+  /* color: #30adb4; */
+  background: "#32c709";
+}
+
+.card {
+  border: 0px solid rgba(0, 0, 0, 0.125) !important;
+}
+
+.user-reaction div {
+  padding-right: 20px;
+}
+
+.explore-card-columns .card {
+  margin-bottom: 0.79rem;
+}
+@media screen and (min-width: 992px) {
+  .explore-card-columns {
+    -webkit-column-count: 4;
+    -moz-column-count: 4;
+    column-count: 4;
+    -webkit-column-gap: 1.25rem;
+    -moz-column-gap: 1.25rem;
+    column-gap: 1.25rem;
+  }
+  .explore-card-columns .card {
+    display: inline-block;
+    width: 100%;
+  }
+}
+@media screen and (max-width: 992px) {
+  .explore-card-columns {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+  }
+}
+@media screen and (max-width: 600px) {
+  .explore-card-columns {
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+  }
+}

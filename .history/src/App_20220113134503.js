@@ -101,9 +101,6 @@ function App() {
             marginBottom: "12px",
           }}
         >
-          <Button variant="danger" className="filterbutton">
-            Number of Clicks:{count}
-          </Button>
           <Button
             variant="danger"
             className="filterbutton"
@@ -146,6 +143,7 @@ function App() {
             </label>
             <input type="submit" value="Search" className="submitbutton" />
           </form>
+          Number of Clicks:{count}
         </div>
         <Modal
           dialogClassName="modal-90w"
@@ -187,9 +185,9 @@ function App() {
                   <figure>
                     <img
                       onClick={() => {
+                        console.log("record being passed", movie);
                         setShow(true);
                         setDetails(movie);
-                        setCount(count + 1);
                       }}
                       src={getImage(movie.poster_path)}
                       alt="poster"

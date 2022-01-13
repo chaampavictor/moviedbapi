@@ -7,18 +7,21 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import { useCallback } from "react";
 const api_key = "872c70d736d1ef4484522f734137927d";
 const BASE_URL = "https://api.themoviedb.org/3";
 const getImage = (path) => `https://image.tmdb.org/t/p/w300/${path}`;
 
 function App() {
   const [data, setData] = useState([]);
-  const [details, setDetails] = useState([]);
+  const [isLoading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
-  const [name, setName] = useState("");
-  const [count, setCount] = useState(0);
+
   const handleClose = () => setShow(false);
+  // const handleShow = () => setShow(true);
+
+  const handleShow = () => {
+    setShow(true);
+  };
 
   const api = axios.create({ baseURL: BASE_URL });
 
@@ -37,8 +40,6 @@ function App() {
   }, []);
 
   const GetMostPopular = () => {
-    setCount(count + 1);
-
     const toprated = api.get("/movie/popular", { params: { api_key } });
     toprated.then((res) => {
       console.log("get popular", res.data.results);
@@ -47,8 +48,6 @@ function App() {
   };
 
   const GetTopRated = (res) => {
-    setCount(count + 1);
-
     const toprated = api.get("/movie/top_rated", { params: { api_key } });
     toprated.then((res) => {
       console.log("get top rated", res.data.results);
@@ -57,8 +56,6 @@ function App() {
   };
 
   const GetPlaying = () => {
-    setCount(count + 1);
-
     const latest = api.get("movie/now_playing", { params: { api_key } });
     latest.then((res) => {
       console.log("now_playing movies", res.data);
@@ -67,24 +64,9 @@ function App() {
   };
 
   const GetUpcoming = () => {
-    setCount(count + 1);
-
     const latest = api.get("movie/upcoming", { params: { api_key } });
     latest.then((res) => {
       console.log("latest movies", res.data);
-      setData(res.data.results);
-    });
-  };
-
-  const searchMovie = async (e) => {
-    setCount(count + 1);
-
-    e.preventDefault();
-
-    console.log(name);
-    const query = name;
-    const latest = api.get("search/movie", { params: { api_key, query } });
-    latest.then((res) => {
       setData(res.data.results);
     });
   };
@@ -101,9 +83,6 @@ function App() {
             marginBottom: "12px",
           }}
         >
-          <Button variant="danger" className="filterbutton">
-            Number of Clicks:{count}
-          </Button>
           <Button
             variant="danger"
             className="filterbutton"
@@ -134,47 +113,20 @@ function App() {
             {" "}
             Upcoming
           </Button>
-          <form onClick={searchMovie}>
-            <label>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Search "
-                className="searchbutton"
-              />
-            </label>
-            <input type="submit" value="Search" className="submitbutton" />
-          </form>
         </div>
-        <Modal
-          dialogClassName="modal-90w"
-          aria-labelledby="example-custom-modal-styling-title"
-          centered
-          show={show}
-          onHide={handleClose}
-          animation={true}
-        >
-          <Row>
-            <Col>
-              <img
-                src={getImage(details.poster_path)}
-                alt="Nature"
-                style={{ width: "100%", height: "466px" }}
-              />
-            </Col>
-          </Row>
-          <Container>
-            <Row>
-              <Col>
-                <h4>{details.original_title}</h4>
-                <p> release date: {details.release_date}</p>
-                <p> popularity: {details.popularity}</p>
-
-                <p> {details.overview}</p>
-              </Col>
-            </Row>
-          </Container>
+        <Modal centered show={show} onHide={handleClose} animation={true}>
+          <Modal.Header closeButton>
+            <Modal.Title>Modal heading</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={handleClose}>
+              Save Changes
+            </Button>
+          </Modal.Footer>
         </Modal>
         <div
           className="explore-card-columns  container-fluid"
@@ -186,11 +138,7 @@ function App() {
                 <div>
                   <figure>
                     <img
-                      onClick={() => {
-                        setShow(true);
-                        setDetails(movie);
-                        setCount(count + 1);
-                      }}
+                      onClick={(() => setShow(true), setData(movie))}
                       src={getImage(movie.poster_path)}
                       alt="poster"
                       className="image-item"

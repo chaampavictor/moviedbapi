@@ -16,38 +16,15 @@
 }
 
 .modalcontainer {
-  background-color: red;
   position: relative;
   font-family: Arial;
 }
 
-.submitbutton {
-  height: 40px;
-  margin-right: 9px;
-  background: #dc3545;
-  border: #dc3545 1px solid;
-  border-radius: 5px;
-  color: white;
-  font-weight: bolder;
-}
-
-.searchbutton {
-  border: 2px solid #dc3545;
-
-  height: 40px;
-  /* margin-right: 9px; */
-
-  border-radius: 5px;
-
-  font-weight: bolder;
-}
-
 .text-block {
   position: absolute;
-  bottom: 260px;
-  height: 210px;
+  bottom: 0px;
   /* right: 150px; */
-  /* background-color: #000000db; */
+  background-color: black;
   color: white;
   padding-left: 20px;
   padding-right: 20px;

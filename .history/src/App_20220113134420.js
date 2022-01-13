@@ -101,9 +101,6 @@ function App() {
             marginBottom: "12px",
           }}
         >
-          <Button variant="danger" className="filterbutton">
-            Number of Clicks:{count}
-          </Button>
           <Button
             variant="danger"
             className="filterbutton"
@@ -134,13 +131,14 @@ function App() {
             {" "}
             Upcoming
           </Button>
+
           <form onClick={searchMovie}>
             <label>
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Search "
+                placeholder="Enter Title "
                 className="searchbutton"
               />
             </label>
@@ -187,9 +185,9 @@ function App() {
                   <figure>
                     <img
                       onClick={() => {
+                        console.log("record being passed", movie);
                         setShow(true);
                         setDetails(movie);
-                        setCount(count + 1);
                       }}
                       src={getImage(movie.poster_path)}
                       alt="poster"

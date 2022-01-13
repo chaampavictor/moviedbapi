@@ -6,88 +6,8 @@
   margin-bottom: 15px;
 }
 
-.image-item:hover {
-  opacity: 0.5;
-}
-
-.container {
-  position: relative;
-  width: 50%;
-}
-
-.modalcontainer {
-  background-color: red;
-  position: relative;
-  font-family: Arial;
-}
-
-.submitbutton {
-  height: 40px;
-  margin-right: 9px;
-  background: #dc3545;
-  border: #dc3545 1px solid;
-  border-radius: 5px;
-  color: white;
-  font-weight: bolder;
-}
-
-.searchbutton {
-  border: 2px solid #dc3545;
-
-  height: 40px;
-  /* margin-right: 9px; */
-
-  border-radius: 5px;
-
-  font-weight: bolder;
-}
-
-.text-block {
-  position: absolute;
-  bottom: 260px;
-  height: 210px;
-  /* right: 150px; */
-  /* background-color: #000000db; */
-  color: white;
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
 .image-item {
-  opacity: 1;
-  display: block;
-  width: 100%;
-  height: auto;
-  transition: 0.5s ease;
-  backface-visibility: hidden;
   border-radius: 52px;
-  cursor: pointer;
-}
-
-.container:hover .image {
-  opacity: 0.3;
-}
-
-.container:hover .middle {
-  opacity: 1;
-}
-
-.text {
-  background-color: red;
-  color: white;
-  font-size: 16px;
-  padding: 16px 32px;
-}
-
-.modal-header {
-  display: flex;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem 1rem;
-  border-bottom: none !important;
-  border-top-left-radius: calc(0.3rem - 1px);
-  border-top-right-radius: calc(0.3rem - 1px);
 }
 
 .filterbutton {
@@ -122,7 +42,7 @@
 }
 .hover01 figure:hover img {
   -webkit-transform: scale(1);
-  transform: scale(1.04);
+  transform: scale(1);
 }
 
 .explore-body .card-body:hover {

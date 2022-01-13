@@ -17,7 +17,7 @@ function App() {
   const [details, setDetails] = useState([]);
   const [show, setShow] = useState(false);
   const [name, setName] = useState("");
-  const [count, setCount] = useState(0);
+
   const handleClose = () => setShow(false);
 
   const api = axios.create({ baseURL: BASE_URL });
@@ -37,8 +37,6 @@ function App() {
   }, []);
 
   const GetMostPopular = () => {
-    setCount(count + 1);
-
     const toprated = api.get("/movie/popular", { params: { api_key } });
     toprated.then((res) => {
       console.log("get popular", res.data.results);
@@ -47,8 +45,6 @@ function App() {
   };
 
   const GetTopRated = (res) => {
-    setCount(count + 1);
-
     const toprated = api.get("/movie/top_rated", { params: { api_key } });
     toprated.then((res) => {
       console.log("get top rated", res.data.results);
@@ -57,8 +53,6 @@ function App() {
   };
 
   const GetPlaying = () => {
-    setCount(count + 1);
-
     const latest = api.get("movie/now_playing", { params: { api_key } });
     latest.then((res) => {
       console.log("now_playing movies", res.data);
@@ -67,8 +61,6 @@ function App() {
   };
 
   const GetUpcoming = () => {
-    setCount(count + 1);
-
     const latest = api.get("movie/upcoming", { params: { api_key } });
     latest.then((res) => {
       console.log("latest movies", res.data);
@@ -77,8 +69,6 @@ function App() {
   };
 
   const searchMovie = async (e) => {
-    setCount(count + 1);
-
     e.preventDefault();
 
     console.log(name);
@@ -101,9 +91,6 @@ function App() {
             marginBottom: "12px",
           }}
         >
-          <Button variant="danger" className="filterbutton">
-            Number of Clicks:{count}
-          </Button>
           <Button
             variant="danger"
             className="filterbutton"
@@ -134,13 +121,14 @@ function App() {
             {" "}
             Upcoming
           </Button>
+
           <form onClick={searchMovie}>
             <label>
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Search "
+                placeholder="Enter Title "
                 className="searchbutton"
               />
             </label>
@@ -187,9 +175,9 @@ function App() {
                   <figure>
                     <img
                       onClick={() => {
+                        console.log("record being passed", movie);
                         setShow(true);
                         setDetails(movie);
-                        setCount(count + 1);
                       }}
                       src={getImage(movie.poster_path)}
                       alt="poster"
