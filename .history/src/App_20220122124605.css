@@ -48,9 +48,9 @@
 
 .filterdiv {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 12px;
+  justifycontent: center;
+  alignitems: center;
+  marginbottom: 12px;
 }
 
 .text-block {

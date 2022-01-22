@@ -33,24 +33,13 @@
 
 .searchbutton {
   border: 2px solid #dc3545;
-  background: #2a2b2e !important;
+
   height: 40px;
-  color: #fff;
   /* margin-right: 9px; */
+
   border-radius: 5px;
+
   font-weight: bolder;
-}
-
-.HeaderText {
-  text-align: center;
-  color: #fff;
-}
-
-.filterdiv {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 12px;
 }
 
 .text-block {
@@ -81,6 +70,10 @@
 
 .container:hover .middle {
   opacity: 1;
+}
+
+.modal-90w {
+  width: 10%;
 }
 
 .text {

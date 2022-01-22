@@ -41,18 +41,6 @@
   font-weight: bolder;
 }
 
-.HeaderText {
-  text-align: center;
-  color: #fff;
-}
-
-.filterdiv {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 12px;
-}
-
 .text-block {
   position: absolute;
   bottom: 260px;

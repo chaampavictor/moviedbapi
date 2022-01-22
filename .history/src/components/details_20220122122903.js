@@ -4,7 +4,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 export default function Details({ data }) {
   const getImage = (path) => `https://image.tmdb.org/t/p/w300/${path}`;
-  console.log("get the movie details", data.id);
 
   return (
     <>
@@ -33,7 +32,7 @@ export default function Details({ data }) {
                     popularity: {data.popularity}
                   </p>
 
-                  <p style={{ color: "white" }}> {data.overview}</p>
+                  <p> {data.overview}</p>
                 </Col>
               </Row>
             </Container>

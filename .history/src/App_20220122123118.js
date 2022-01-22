@@ -84,9 +84,16 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className="HeaderText">Movie DB API</h1>
+      <h1 style={{ textAlign: "center", color: "#fff" }}>Movie DB API</h1>
       <header>
-        <div className="filterdiv">
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            marginBottom: "12px",
+          }}
+        >
           {/**/}
           <Button variant="danger" className="filterbutton">
             Number of Clicks:{count}

@@ -82,6 +82,10 @@ function App() {
     });
   };
 
+  const gotomovie = (movie) => {
+    console.log("get the movie");
+  };
+
   return (
     <div className="App">
       <h1 className="HeaderText">Movie DB API</h1>
@@ -120,11 +124,12 @@ function App() {
                 <div>
                   <figure>
                     <img
-                      onClick={() => {
-                        setShow(true);
-                        setDetails(movie);
-                        setCount(count + 1);
-                      }}
+                      onClick={gotomovie}
+                      // onClick={() => {
+                      //   setShow(true);
+                      //   setDetails(movie);
+                      //   setCount(count + 1);
+                      // }}
                       src={getImage(movie.poster_path)}
                       alt="poster"
                       className="image-item"
