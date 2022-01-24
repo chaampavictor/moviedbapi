@@ -86,6 +86,17 @@ function App() {
     });
   };
 
+  const getinfo = (value) => () => {
+    const getmoviedata = api.get(`movie/${value.id}`, {
+      params: { api_key },
+    });
+    getmoviedata.then((res) => {
+      setShow(true);
+      setDetails(res.data);
+      setCount(count + 1);
+    });
+  };
+
   const handlePagination = (data) => {
     console.log("get page count", data.selected);
 
@@ -94,7 +105,6 @@ function App() {
     const getPage = api.get("/movie/popular", { params: { api_key, page } });
     getPage.then((res) => {
       setData(res.data.results);
-      console.log("get the new page", res.data);
     });
   };
 
@@ -136,11 +146,7 @@ function App() {
                 <div>
                   <figure>
                     <img
-                      onClick={() => {
-                        setShow(true);
-                        setDetails(movie);
-                        setCount(count + 1);
-                      }}
+                      onClick={getinfo(movie)}
                       src={getImage(movie.poster_path)}
                       alt="poster"
                       className="image-item"
@@ -171,21 +177,6 @@ function App() {
         containerClassName="pagination"
         activeClassName="active"
         renderOnZeroPageCount={null}
-
-        // marginPagesDisplayed={2}
-        // pageRangeDisplayed={10}
-        // previousLabel="previous"
-        // nextLabel="next"
-        // breakLabel={"..."}
-        // pageCount={pageNum}
-        // onPageChange={handlePagination}
-        // containerClassName="pageContainer"
-        // pageClassName={"xl:mx-1 rounded-full "}
-        // pageLinkClassName={
-        //   "py-2 px-4 w-6 h-8 lg:w-10 lg:h-10 flex items-center justify-center hover:bg-green-500 transition hover:text-white rounded-full "
-        // }
-        // activeClassName={"bg-green-400 cursor-pointer text-white"}
-        // breakLinkClassName={"text-green-400 font-semibold"}
       />
     </div>
   );
