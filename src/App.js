@@ -16,6 +16,7 @@ const getImage = (path) => `https://image.tmdb.org/t/p/w300/${path}`;
 
 function App() {
   const [data, setData] = useState([]);
+  const [initialdata, setInitialData] = useState([]);
   const [details, setDetails] = useState([]);
   const [show, setShow] = useState(false);
   const [count, setCount] = useState(0);
@@ -46,44 +47,47 @@ function App() {
 
         moviedata.sort((a, b) => a.popularity - b.popularity);
         setData(moviedata);
+        setInitialData(moviedata);
       }
 
       if (value === "descending") {
         let moviedata = data;
-
         moviedata.sort((a, b) => b.popularity - a.popularity);
         console.log("get the sorted data", moviedata);
         setData(moviedata);
+        setInitialData(moviedata);
       }
-
       setPageNum(res.data.total_pages);
     });
   };
 
   const SortByRating = (value) => {
     console.log("get value", value);
-
     setCount(count + 1);
-
-    getUpcoming.then((res) => {
-      if (value === "ascending") {
+    if (value === "ascending") {
+      getUpcoming.then((res) => {
         let moviedata = data;
-
         moviedata.sort((a, b) => a.vote_average - b.vote_average);
-        setData(moviedata);
-      }
+        setInitialData(moviedata);
+        setPageNum(res.data.total_pages);
+      });
+    }
 
-      if (value === "descending") {
+    if (value === "descending") {
+      getUpcoming.then((res) => {
         let moviedata = data;
 
         moviedata.sort((a, b) => b.vote_average - a.vote_average);
-        console.log("get the sorted data", moviedata);
-        setData(moviedata);
-      }
-
-      setPageNum(res.data.total_pages);
-    });
+        console.log("get the sorted data", res.data);
+        setInitialData(moviedata);
+        setPageNum(res.data.total_pages);
+      });
+    }
   };
+
+  useEffect(() => {
+    setData(initialdata);
+  }, [initialdata]);
 
   const searchMovie = (name) => {
     setCount(count + 1);
