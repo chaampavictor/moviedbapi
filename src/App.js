@@ -91,9 +91,10 @@ function App() {
       params: { api_key },
     });
     getmoviedata.then((res) => {
-      setShow(true);
+      console.log("get the data", res.data);
       setDetails(res.data);
       setCount(count + 1);
+      setShow(true);
     });
   };
 
