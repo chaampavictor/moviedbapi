@@ -35,43 +35,53 @@ function App() {
     });
   }, []);
 
-  const GetMostPopular = () => {
+  const GetMostPopular = (value) => {
+    console.log("get value", value);
+
     setCount(count + 1);
 
-    const toprated = api.get("/movie/popular", { params: { api_key } });
-    toprated.then((res) => {
-      console.log("get popular", res.data.results);
-      setData(res.data.results);
+    getUpcoming.then((res) => {
+      if (value === "ascending") {
+        let moviedata = data;
+
+        moviedata.sort((a, b) => a.popularity - b.popularity);
+        setData(moviedata);
+      }
+
+      if (value === "descending") {
+        let moviedata = data;
+
+        moviedata.sort((a, b) => b.popularity - a.popularity);
+        console.log("get the sorted data", moviedata);
+        setData(moviedata);
+      }
+
+      setPageNum(res.data.total_pages);
     });
   };
 
-  const GetTopRated = (res) => {
+  const SortByRating = (value) => {
+    console.log("get value", value);
+
     setCount(count + 1);
 
-    const toprated = api.get("/movie/top_rated", { params: { api_key } });
-    toprated.then((res) => {
-      console.log("get top rated", res.data.results);
-      setData(res.data.results);
-    });
-  };
+    getUpcoming.then((res) => {
+      if (value === "ascending") {
+        let moviedata = data;
 
-  const PlayingNow = () => {
-    setCount(count + 1);
-    const name = "now_playing";
-    const latest = api.get(`movie/${name}`, { params: { api_key } });
-    latest.then((res) => {
-      console.log("now_playing movies", res.data);
-      setData(res.data.results);
-    });
-  };
+        moviedata.sort((a, b) => a.vote_average - b.vote_average);
+        setData(moviedata);
+      }
 
-  const GetUpcoming = () => {
-    setCount(count + 1);
+      if (value === "descending") {
+        let moviedata = data;
 
-    const latest = api.get("movie/upcoming", { params: { api_key } });
-    latest.then((res) => {
-      console.log("latest movies", res.data);
-      setData(res.data.results);
+        moviedata.sort((a, b) => b.vote_average - a.vote_average);
+        console.log("get the sorted data", moviedata);
+        setData(moviedata);
+      }
+
+      setPageNum(res.data.total_pages);
     });
   };
 
@@ -86,18 +96,6 @@ function App() {
     });
   };
 
-  const getinfo = (value) => () => {
-    const getmoviedata = api.get(`movie/${value.id}`, {
-      params: { api_key },
-    });
-    getmoviedata.then((res) => {
-      console.log("get the data", res.data);
-      setDetails(res.data);
-      setCount(count + 1);
-      setShow(true);
-    });
-  };
-
   const handlePagination = (data) => {
     console.log("get page count", data.selected);
 
@@ -106,6 +104,7 @@ function App() {
     const getPage = api.get("/movie/popular", { params: { api_key, page } });
     getPage.then((res) => {
       setData(res.data.results);
+      console.log("get the new page", res.data);
     });
   };
 
@@ -119,9 +118,7 @@ function App() {
             Number of Clicks:{count}
           </Button>
           <Filterbutton
-            PlayingNow={PlayingNow}
-            GetUpcoming={GetUpcoming}
-            GetTopRated={GetTopRated}
+            SortByRating={SortByRating}
             GetMostPopular={GetMostPopular}
           />
 
@@ -138,7 +135,7 @@ function App() {
           <Details data={details} />
         </Modal>
         <div
-          className="explore-card-columns  container-fluid"
+          className="explore-card-columns "
           style={{ marginBottom: "100px" }}
         >
           {data.map((movie) => (
@@ -147,7 +144,11 @@ function App() {
                 <div>
                   <figure>
                     <img
-                      onClick={getinfo(movie)}
+                      onClick={() => {
+                        setShow(true);
+                        setDetails(movie);
+                        setCount(count + 1);
+                      }}
                       src={getImage(movie.poster_path)}
                       alt="poster"
                       className="image-item"

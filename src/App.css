@@ -160,6 +160,11 @@
     -webkit-column-gap: 1.25rem;
     -moz-column-gap: 1.25rem;
     column-gap: 1.25rem;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-row-gap: 10px;
+    grid-column-gap: 20px;
+    padding: 10px;
   }
   .explore-card-columns .card {
     display: inline-block;
