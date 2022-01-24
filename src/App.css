@@ -154,9 +154,9 @@
 }
 @media screen and (min-width: 992px) {
   .explore-card-columns {
-    -webkit-column-count: 4;
-    -moz-column-count: 4;
-    column-count: 4;
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
     -webkit-column-gap: 1.25rem;
     -moz-column-gap: 1.25rem;
     column-gap: 1.25rem;
@@ -179,4 +179,27 @@
     -moz-column-count: 1;
     column-count: 1;
   }
+}
+
+.pageContainer {
+  /* background: red; */
+  flex: 1;
+}
+
+.page-item:first-child .page-link {
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+  /* background: #dc3545 !important; */
+  color: #dc3545;
+}
+
+.page-item:not(:first-child) .page-link {
+  margin-left: -1px;
+  color: red;
+}
+.page-item.active .page-link {
+  z-index: 3;
+  color: #fff;
+  background-color: #dc3545 !important;
+  border-color: #dc3545 !important;
 }

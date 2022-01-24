@@ -7,7 +7,7 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Searchform from "./components/searchform.js";
 import Filterbutton from "./components/filterbutton";
-
+import ReactPaginate from "react-paginate";
 import Details from "./components/details";
 import { useCallback } from "react";
 const api_key = "872c70d736d1ef4484522f734137927d";
@@ -19,6 +19,7 @@ function App() {
   const [details, setDetails] = useState([]);
   const [show, setShow] = useState(false);
   const [count, setCount] = useState(0);
+  const [pageNum, setPageNum] = useState(0);
   const handleClose = () => setShow(false);
 
   const api = axios.create({ baseURL: BASE_URL });
@@ -28,6 +29,9 @@ function App() {
   useEffect(() => {
     getUpcoming.then((res) => {
       setData(res.data.results);
+      setPageNum(res.data.total_pages);
+
+      console.log("get pagination", res.data);
     });
   }, []);
 
@@ -79,6 +83,18 @@ function App() {
     const latest = api.get("search/movie", { params: { api_key, query } });
     latest.then((res) => {
       setData(res.data.results);
+    });
+  };
+
+  const handlePagination = (data) => {
+    console.log("get page count", data.selected);
+
+    const page = data.selected;
+
+    const getPage = api.get("/movie/popular", { params: { api_key, page } });
+    getPage.then((res) => {
+      setData(res.data.results);
+      console.log("get the new page", res.data);
     });
   };
 
@@ -136,6 +152,41 @@ function App() {
           ))}
         </div>
       </header>
+      <ReactPaginate
+        nextLabel="Next Page "
+        onPageChange={handlePagination}
+        pageRangeDisplayed={10}
+        marginPagesDisplayed={2}
+        pageCount={pageNum}
+        previousLabel=" Previous Page"
+        pageClassName="page-item"
+        pageLinkClassName="page-link"
+        previousClassName="page-item"
+        previousLinkClassName="page-link"
+        nextClassName="page-item"
+        nextLinkClassName="page-link"
+        breakLabel="..."
+        breakClassName="page-item"
+        breakLinkClassName="page-link"
+        containerClassName="pagination"
+        activeClassName="active"
+        renderOnZeroPageCount={null}
+
+        // marginPagesDisplayed={2}
+        // pageRangeDisplayed={10}
+        // previousLabel="previous"
+        // nextLabel="next"
+        // breakLabel={"..."}
+        // pageCount={pageNum}
+        // onPageChange={handlePagination}
+        // containerClassName="pageContainer"
+        // pageClassName={"xl:mx-1 rounded-full "}
+        // pageLinkClassName={
+        //   "py-2 px-4 w-6 h-8 lg:w-10 lg:h-10 flex items-center justify-center hover:bg-green-500 transition hover:text-white rounded-full "
+        // }
+        // activeClassName={"bg-green-400 cursor-pointer text-white"}
+        // breakLinkClassName={"text-green-400 font-semibold"}
+      />
     </div>
   );
 }
