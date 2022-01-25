@@ -98,6 +98,7 @@ function App() {
     const getPage = api.get("/movie/popular", { params: { api_key, page } });
     getPage.then((res) => {
       setData(res.data.results);
+      setInitialData(res.data.results);
       console.log("get the new page", res.data);
     });
   };
