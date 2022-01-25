@@ -51,17 +51,6 @@ function App() {
     sortArray(sortType);
   }, [sortType]);
 
-  const searchMovie = (name) => {
-    setCount(count + 1);
-
-    console.log(name);
-    const query = name;
-    const latest = api.get("search/movie", { params: { api_key, query } });
-    latest.then((res) => {
-      setData(res.data.results);
-    });
-  };
-
   const handlePagination = (data) => {
     console.log("get page count", data.selected);
 
@@ -108,8 +97,6 @@ function App() {
           >
             Release Date
           </Button>
-
-          {/* <Searchform handleSubmit={searchMovie} /> */}
         </div>
         <Modal
           aria-labelledby="example-custom-modal-styling-title"
