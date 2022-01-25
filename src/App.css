@@ -208,3 +208,7 @@
   background-color: #dc3545 !important;
   border-color: #dc3545 !important;
 }
+.sorttext {
+  color: #fff;
+  margin-right: 12px;
+}

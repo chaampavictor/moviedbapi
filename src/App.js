@@ -69,11 +69,7 @@ function App() {
       <h1 className="HeaderText">Movie DB API</h1>
       <header>
         <div className="filterdiv">
-          {/**/}
-          <Button variant="danger" className="filterbutton">
-            Number of Clicks:{count}
-          </Button>
-
+          <p className="sorttext">Sort by:</p>
           <Button
             variant="danger"
             className="filterbutton"
@@ -85,7 +81,6 @@ function App() {
           >
             Top Rated
           </Button>
-
           <Button
             variant="danger"
             className="filterbutton"
@@ -96,6 +91,9 @@ function App() {
             }}
           >
             Release Date
+          </Button>
+          <Button variant="danger" className="filterbutton">
+            Number of Clicks:{count}
           </Button>
         </div>
         <Modal
