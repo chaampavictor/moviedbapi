@@ -14,34 +14,8 @@ const api_key = "872c70d736d1ef4484522f734137927d";
 const BASE_URL = "https://api.themoviedb.org/3";
 const getImage = (path) => `https://image.tmdb.org/t/p/w300/${path}`;
 
-const bands = [
-  {
-    id: 1,
-    name: "Nightwish",
-    albums: 9,
-    members: 6,
-    formed_in: 1996,
-  },
-  {
-    id: 2,
-    name: "Metallica",
-    albums: 10,
-    members: 4,
-    formed_in: 1981,
-  },
-  {
-    id: 3,
-    name: "Nirvana",
-    albums: 3,
-    members: 3,
-    formed_in: 1987,
-  },
-];
-
 function App() {
   const [data, setData] = useState([]);
-  const [sortType, setSortType] = useState("");
-  // const [data, setData] = useState([]);
   const [initialdata, setInitialData] = useState([]);
   const [details, setDetails] = useState([]);
   const [show, setShow] = useState(false);
@@ -56,28 +30,64 @@ function App() {
   useEffect(() => {
     getUpcoming.then((res) => {
       setData(res.data.results);
-      setInitialData(res.data.results);
-
       setPageNum(res.data.total_pages);
 
       console.log("get pagination", res.data);
     });
   }, []);
-  useEffect(() => {
-    const sortArray = (type) => {
-      const types = {
-        vote_average: "vote_average",
-        release_date: "release_date",
-      };
-      const sortProperty = types[type];
-      const sorted = [...initialdata].sort(
-        (a, b) => new Date(b[sortProperty]) - new Date(a[sortProperty])
-      );
-      setData(sorted);
-    };
 
-    sortArray(sortType);
-  }, [sortType]);
+  const GetMostPopular = (value) => {
+    console.log("get value", value);
+
+    setCount(count + 1);
+
+    getUpcoming.then((res) => {
+      if (value === "ascending") {
+        let moviedata = data;
+
+        moviedata.sort((a, b) => a.popularity - b.popularity);
+        setData(moviedata);
+        setInitialData(moviedata);
+      }
+
+      if (value === "descending") {
+        let moviedata = data;
+        moviedata.sort((a, b) => b.popularity - a.popularity);
+        console.log("get the sorted data", moviedata);
+        setData(moviedata);
+        setInitialData(moviedata);
+      }
+      setPageNum(res.data.total_pages);
+    });
+  };
+
+  const SortByRating = (value) => {
+    console.log("get value", value);
+    setCount(count + 1);
+    if (value === "ascending") {
+      getUpcoming.then((res) => {
+        let moviedata = data;
+        moviedata.sort((a, b) => a.vote_average - b.vote_average);
+        setInitialData(moviedata);
+        setPageNum(res.data.total_pages);
+      });
+    }
+
+    if (value === "descending") {
+      getUpcoming.then((res) => {
+        let moviedata = data;
+
+        moviedata.sort((a, b) => b.vote_average - a.vote_average);
+        console.log("get the sorted data", res.data);
+        setInitialData(moviedata);
+        setPageNum(res.data.total_pages);
+      });
+    }
+  };
+
+  useEffect(() => {
+    setData(initialdata);
+  }, [initialdata]);
 
   const searchMovie = (name) => {
     setCount(count + 1);
@@ -111,32 +121,12 @@ function App() {
           <Button variant="danger" className="filterbutton">
             Number of Clicks:{count}
           </Button>
+          <Filterbutton
+            SortByRating={SortByRating}
+            GetMostPopular={GetMostPopular}
+          />
 
-          <Button
-            variant="danger"
-            className="filterbutton"
-            onClick={() => {
-              setSortType("vote_average");
-
-              setCount(count + 1);
-            }}
-          >
-            Top Rated
-          </Button>
-
-          <Button
-            variant="danger"
-            className="filterbutton"
-            onClick={() => {
-              setSortType("release_date");
-
-              setCount(count + 1);
-            }}
-          >
-            Release Date
-          </Button>
-
-          {/* <Searchform handleSubmit={searchMovie} /> */}
+          <Searchform handleSubmit={searchMovie} />
         </div>
         <Modal
           aria-labelledby="example-custom-modal-styling-title"
