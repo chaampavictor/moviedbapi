@@ -5,43 +5,15 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Modal from "react-bootstrap/Modal";
 
 import Button from "react-bootstrap/Button";
-import Searchform from "./components/searchform.js";
-import Filterbutton from "./components/filterbutton";
 import ReactPaginate from "react-paginate";
 import Details from "./components/details";
-import { useCallback } from "react";
 const api_key = "872c70d736d1ef4484522f734137927d";
 const BASE_URL = "https://api.themoviedb.org/3";
 const getImage = (path) => `https://image.tmdb.org/t/p/w300/${path}`;
 
-const bands = [
-  {
-    id: 1,
-    name: "Nightwish",
-    albums: 9,
-    members: 6,
-    formed_in: 1996,
-  },
-  {
-    id: 2,
-    name: "Metallica",
-    albums: 10,
-    members: 4,
-    formed_in: 1981,
-  },
-  {
-    id: 3,
-    name: "Nirvana",
-    albums: 3,
-    members: 3,
-    formed_in: 1987,
-  },
-];
-
 function App() {
   const [data, setData] = useState([]);
   const [sortType, setSortType] = useState("");
-  // const [data, setData] = useState([]);
   const [initialdata, setInitialData] = useState([]);
   const [details, setDetails] = useState([]);
   const [show, setShow] = useState(false);
