@@ -7,6 +7,8 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import ReactPaginate from "react-paginate";
 import Details from "./components/details";
+import { useMediaQuery } from "react-responsive";
+
 const api_key = "872c70d736d1ef4484522f734137927d";
 const BASE_URL = "https://api.themoviedb.org/3";
 const getImage = (path) => `https://image.tmdb.org/t/p/w300/${path}`;
@@ -63,6 +65,9 @@ function App() {
       console.log("get the new page", res.data);
     });
   };
+
+  const isBigScreen = useMediaQuery({ query: "(min-width: 992px)" });
+  const mobile = useMediaQuery({ query: "(max-width:600px)" });
 
   return (
     <div className="App">
@@ -132,26 +137,55 @@ function App() {
           ))}
         </div>
       </header>
-      <ReactPaginate
-        nextLabel="Next Page "
-        onPageChange={handlePagination}
-        pageRangeDisplayed={10}
-        marginPagesDisplayed={2}
-        pageCount={pageNum}
-        previousLabel=" Previous Page"
-        pageClassName="page-item"
-        pageLinkClassName="page-link"
-        previousClassName="page-item"
-        previousLinkClassName="page-link"
-        nextClassName="page-item"
-        nextLinkClassName="page-link"
-        breakLabel="..."
-        breakClassName="page-item"
-        breakLinkClassName="page-link"
-        containerClassName="pagination"
-        activeClassName="active"
-        renderOnZeroPageCount={null}
-      />
+
+      {isBigScreen && (
+        <>
+          <ReactPaginate
+            nextLabel="Next  "
+            onPageChange={handlePagination}
+            pageRangeDisplayed={26}
+            marginPagesDisplayed={0}
+            pageCount={pageNum}
+            previousLabel=" Previous"
+            pageClassName="page-item"
+            pageLinkClassName="page-link"
+            previousClassName="page-item"
+            previousLinkClassName="page-link"
+            nextClassName="page-item"
+            nextLinkClassName="page-link"
+            breakLabel="..."
+            breakClassName="page-item"
+            breakLinkClassName="page-link"
+            containerClassName="pagination"
+            activeClassName="active"
+            renderOnZeroPageCount={null}
+          />
+        </>
+      )}
+      {mobile && (
+        <>
+          <ReactPaginate
+            nextLabel="Next "
+            onPageChange={handlePagination}
+            pageRangeDisplayed={7}
+            marginPagesDisplayed={0}
+            pageCount={pageNum}
+            previousLabel=" Previous "
+            pageClassName="page-item"
+            pageLinkClassName="page-link"
+            previousClassName="page-item"
+            previousLinkClassName="page-link"
+            nextClassName="page-item"
+            nextLinkClassName="page-link"
+            breakLabel="..."
+            breakClassName="page-item"
+            breakLinkClassName="page-link"
+            containerClassName="pagination"
+            activeClassName="active"
+            renderOnZeroPageCount={null}
+          />
+        </>
+      )}
     </div>
   );
 }
